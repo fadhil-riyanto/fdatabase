@@ -6,7 +6,11 @@ function main(): noreturn {
     $db = new fdatabase("db.fdb", dict[
         "set_load_file" => true
     ]);
-    $db->set("foUoe", "bare", true);
-    $db->commit();
+    $db->set("foUoe", "barokah", true);
+    // $db->commit();
+
+    echo $db->get("foUoe");
+
+    echo $db->get("foUoe");
     exit(0);
 }
