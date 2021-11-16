@@ -1,4 +1,6 @@
-class fdatabase
+<?hh
+
+class fdatabase extends futils
 {   
     private $filename;
     private $database_variabel;
@@ -21,6 +23,7 @@ class fdatabase
                 }else{
                     $ditemukan = false;
                 }
+                
             }
             $check_jika_ada = ($ditemukan == true) ? true : false;
 
@@ -29,7 +32,7 @@ class fdatabase
                 // cek apakah value sudah ada di database
                 // if(array_key_exists($key, $this->database_variabel)){
                     //  print("Key $key sudah ada di database");
-                    throw new  Exception("Key $key sudah ada di database", 1);
+                    throw new Exception("Key $key sudah ada di database", 1);
                     
                 // }else{
                 //     $this->database_variabel[$key] = $value;
