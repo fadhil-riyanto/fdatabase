@@ -45,15 +45,3 @@ class fdatabase
     }
 }
 
-
-<<__EntryPoint>>
-function main(): noreturn {
-    // require(__DIR__ . '/main.hack');
-    $db = new fdatabase("test.fdb");
-    // $db->set("hai", "hai juga");
-    // $db->set("nama", "fadhil");
-    // $db->set("kelas", "10");
-    echo $db->get("hobi");
-    $db->commit();
-    exit(0);
-}

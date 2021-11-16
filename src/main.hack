@@ -9,13 +9,57 @@ class fdatabase
     public function debug_fs() {
         echo $this->filename;
     }
-    public function set(string $key, $value) {
-        if($this->database_variabel != null){
-            $this->database_variabel[$key] = $value;
+    public function set(string $key, $value,  bool $timpa = true): bool {
+        if($timpa == false){
+            if(isset($this->database_variabel[$key])){
+                $ditemukan = true;
+            }
+            else{
+                $this->database_variabel = json_decode(file_get_contents($this->filename), true);
+                if(isset($this->database_variabel[$key])){
+                    $ditemukan = true;
+                }else{
+                    $ditemukan = false;
+                }
+            }
+            $check_jika_ada = ($ditemukan == true) ? true : false;
+
+            echo "debug timpa = 1";
+            if($check_jika_ada){
+                // cek apakah value sudah ada di database
+                // if(array_key_exists($key, $this->database_variabel)){
+                    //  print("Key $key sudah ada di database");
+                    throw new  Exception("Key $key sudah ada di database", 1);
+                    
+                // }else{
+                //     $this->database_variabel[$key] = $value;
+                //     return true;
+                //     echo "di db";
+                // }
+            }else{
+                // if(array_key_exists($key, $this->database_variabel)){
+                //     print("Key $key sudah ada di database");
+                // }else{
+                //     $this->database_variabel[$key] = $value;
+                //     return true;
+                //     echo "di db";
+                // }
+                print("debug it");
+                $this->database_variabel = dict[$key => $value];
+                return true;
+            }
+        }else{
+            if($this->database_variabel != null){
+                $this->database_variabel[$key] = $value;
+                return true;
+            }
+            else{
+                $this->database_variabel = dict[$key => $value];
+                return true;
+            }
         }
-        else{
-            $this->database_variabel = dict[$key => $value];
-        }
+        
+        // return false;
     }
     public function get(string $key) {
         if(isset($this->database_variabel[$key])){
