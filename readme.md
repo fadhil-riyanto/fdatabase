@@ -1,18 +1,34 @@
 # how to use
 
-hack```
+```hack
 <<__EntryPoint>>
 function main(): noreturn {
     require(__DIR__ . "/../src/Utils.hh");
     require(__DIR__ . '/../src/main.hh');
-    $db = new fdatabase("db.fdb", dict[ // db.fdb must exist!!
-        "set_load_file" => true  // this is setting, true if you want check value from database before set() method, this is
-                                // will enabled if you passed the set("key", "value", false);
-                                // the false bool will check from database if any key not same with target key
+    $db = new fdatabase("db.fdb", dict[ 
+        "set_load_file" => true
     ]);
-    $db->set("foUoe", "bare", true); // this will saved to memory, non overwritten
+    $db->set("foUoe", "bare", true); 
     $db->commit(); // commit to file
 
     echo $db->get("foUoe");
 }
 ```
+
+# method
+
++ set(key, value, overwritten)
+    - key is a identifier of value
+    - value is a content
+    - overwritten is condition, default is true. turn false if you not overwrite the data
++ del(key)
+    - key to delete
+
++ commit()
+    - for append data from memory to non volatile file
+
++ get(key)
+    - getting the key
+
+# note 
+the construct class of fdatabase must be exist!

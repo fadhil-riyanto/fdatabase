@@ -6,8 +6,8 @@ function main(): noreturn {
     $db = new fdatabase("db.fdb", dict[
         "set_load_file" => true
     ]);
-    // $db->set("keys1", "value1");
-    $db->del("keys1");
+    $db->del("keys2");
+    $db->debug_mem();
     $db->commit();
     exit(0);
 }

@@ -15,4 +15,8 @@ class futils{
         }
         return implode('', $pieces);
     }
+    protected static function decode_json(string $file) {
+        $json = file_get_contents($file);
+        return json_decode($json, true);
+    }
 }
