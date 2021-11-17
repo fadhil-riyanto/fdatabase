@@ -210,7 +210,7 @@ class fdatabase extends futils
                 }elseif($jsonfile == null){
                     $this->database_variabel = $this->database_variabel;
                 }
-                echo "commit bagian $\normal hehe";
+
                 file_put_contents($this->filename, json_encode($this->database_variabel));
             }elseif($this->jsonfile_arr == null){
                 if($jsonfile != null && $this->database_variabel != null){
@@ -220,11 +220,11 @@ class fdatabase extends futils
                 }elseif($jsonfile == null){
                     $this->database_variabel = $this->database_variabel;
                 }
-                echo "commit bagian $\normal hehe";
+
                 file_put_contents($this->filename, json_encode($this->database_variabel));
             }
             else{
-                echo "commit bagian $\jsonfilearr hehe";
+
                 file_put_contents($this->filename, json_encode($this->database_variabel));
             }
             
