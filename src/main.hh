@@ -4,6 +4,7 @@ class fdatabase extends futils
 {   
     private $filename, $load_dari_file_for_set;
     private $database_variabel;
+    private $jsonfile_arr;
     function __construct($namefile, dict<bool> $config_database){
         $this->filename = $namefile;
         $this->load_dari_file_for_set = $config_database["set_load_file"];
@@ -161,10 +162,10 @@ class fdatabase extends futils
         }
         else{
 
-            $jsonfile = json_decode(file_get_contents($this->filename), true);
+            $jsonfile  = json_decode(file_get_contents($this->filename), true);
             if(isset($jsonfile[$key])){
                 unset($jsonfile[$key]);
-                
+                $this->jsonfile_arr = $jsonfile;
                 if($jsonfile != null && $this->database_variabel != null){
                     $this->database_variabel = array_merge($jsonfile, $this->database_variabel);
                 }elseif ($this->database_variabel == null) {
@@ -198,16 +199,23 @@ class fdatabase extends futils
     public function commit(){
         if(file_exists($this->filename)){
             $jsonfile = json_decode(file_get_contents($this->filename), true);
-            var_dump($jsonfile);
-            if($jsonfile != null && $this->database_variabel != null){
-                $this->database_variabel = array_merge($jsonfile, $this->database_variabel);
-            }elseif ($this->database_variabel == null) {
-                $this->database_variabel = $jsonfile;
-            }elseif($jsonfile == null){
-                $this->database_variabel = $this->database_variabel;
+
+            if($jsonfile == $this->jsonfile_arr && $this->jsonfile_arr != null){
+            // var_dump($jsonfile);
+                if($jsonfile != null && $this->database_variabel != null){
+                    $this->database_variabel = array_merge($jsonfile, $this->database_variabel);
+                }elseif ($this->database_variabel == null) {
+                    $this->database_variabel = $jsonfile;
+                }elseif($jsonfile == null){
+                    $this->database_variabel = $this->database_variabel;
+                }
+                echo "commit bagian $\normal hehe";
+                file_put_contents($this->filename, json_encode($this->database_variabel));
+            }else{
+                echo "commit bagian $\jsonfilearr hehe";
+                file_put_contents($this->filename, json_encode($this->database_variabel));
             }
             
-            file_put_contents($this->filename, json_encode($this->database_variabel));
         }else{
             // $this->database_variabel = array();
             // buat file
