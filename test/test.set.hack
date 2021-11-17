@@ -6,7 +6,7 @@ function main(): noreturn {
     $db = new fdatabase("db.fdb", dict[
         "set_load_file" => true
     ]);
-    $db->del("pepp");
+    $db->set("foo", "bar");
     $db->commit();
     exit(0);
 }
