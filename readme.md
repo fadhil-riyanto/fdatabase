@@ -31,4 +31,4 @@ function main(): noreturn {
     - getting the key
 
 # note 
-the construct class of fdatabase must be exist!
+the file in construct class of fdatabase must be exist!
