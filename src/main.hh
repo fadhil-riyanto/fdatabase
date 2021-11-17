@@ -147,6 +147,39 @@ class fdatabase extends futils
         
         // return false;
     }
+    public function del($key): bool {
+        // if(isset($this->database_variabel[$key])){
+        //     unset($this->database_variabel[$key]);
+        //     return true;
+        // }else{
+        //     throw new \Exception("Key $key tidak ada di database", 1);
+        //     return false;
+        // }
+        if(isset($this->database_variabel[$key])){
+            unset($this->database_variabel[$key]);
+            return true;
+        }
+        else{
+
+            $jsonfile = json_decode(file_get_contents($this->filename), true);
+            if(isset($jsonfile[$key])){
+                unset($jsonfile[$key]);
+                
+                if($jsonfile != null && $this->database_variabel != null){
+                    $this->database_variabel = array_merge($jsonfile, $this->database_variabel);
+                }elseif ($this->database_variabel == null) {
+                    $this->database_variabel = $jsonfile;
+                }elseif($jsonfile == null){
+                    $this->database_variabel = $this->database_variabel;
+                }
+                var_dump($jsonfile);
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
     public function get(string $key) {
         if(isset($this->database_variabel[$key])){
             return $this->database_variabel[$key];
