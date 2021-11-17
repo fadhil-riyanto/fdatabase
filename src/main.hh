@@ -31,7 +31,7 @@ class fdatabase extends futils
                 }else{
                     //cek jika config mau diload dari file
                     if($this->load_dari_file_for_set == true){
-                        $this->database_variabel = json_decode(file_get_contents($this->filename), true);
+                        $this->database_variabel = futils::decode_json($this->filename);
                         if($this->database_variabel == null){
                             $this->database_variabel = dict[$key => $value];
                             return true;
@@ -70,7 +70,7 @@ class fdatabase extends futils
                 // if(isset($this->database_variabel[$key])){
                 if($this->database_variabel == null){
                     if($this->load_dari_file_for_set == true){
-                        $this->database_variabel = json_decode(file_get_contents($this->filename), true);
+                        $this->database_variabel = futils::decode_json($this->filename);
                         if($this->database_variabel == null){
                             $this->database_variabel = dict[$key => $value];
                             return true;
@@ -107,7 +107,7 @@ class fdatabase extends futils
             //     $ditemukan = true;
             // }
             // else{
-            //     $this->database_variabel = json_decode(file_get_contents($this->filename), true);
+            //     $this->database_variabel = futils::decode_json($this->filename);
             //     if(isset($this->database_variabel[$key])){
             //         $ditemukan = true;
             //     }else{
@@ -164,7 +164,7 @@ class fdatabase extends futils
         }
         else{
 
-            $jsonfile  = json_decode(file_get_contents($this->filename), true);
+            $jsonfile  = futils::decode_json($this->filename);
             if(isset($jsonfile[$key])){
                 unset($jsonfile[$key]);
                 $this->jsonfile_arr = $jsonfile;
@@ -187,7 +187,7 @@ class fdatabase extends futils
             return $this->database_variabel[$key];
         }
         else{
-            $decode_filejson_nya = json_decode(file_get_contents($this->filename), true);
+            $decode_filejson_nya = futils::decode_json($this->filename);
             if(isset($decode_filejson_nya[$key])){
                 return $decode_filejson_nya[$key];
             }else{
@@ -199,7 +199,7 @@ class fdatabase extends futils
     }
     public function commit(){
         if(file_exists($this->filename)){
-            $jsonfile = json_decode(file_get_contents($this->filename), true);
+            $jsonfile = futils::decode_json($this->filename);
 
             if($jsonfile == $this->jsonfile_arr && $this->jsonfile_arr != null){
             // var_dump($jsonfile);
